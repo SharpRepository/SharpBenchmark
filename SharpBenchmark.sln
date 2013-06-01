@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpBenchmark", "SharpBenchmark\SharpBenchmark.csproj", "{DF0FC087-3D83-4DD4-B8F9-F6688F5FC70A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpBenchmark.Samples", "SharpBenchmark.Samples\SharpBenchmark.Samples.csproj", "{78A8F10A-B3CA-4C45-8EB7-D5AEE0B7E73F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF0FC087-3D83-4DD4-B8F9-F6688F5FC70A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF0FC087-3D83-4DD4-B8F9-F6688F5FC70A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF0FC087-3D83-4DD4-B8F9-F6688F5FC70A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF0FC087-3D83-4DD4-B8F9-F6688F5FC70A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78A8F10A-B3CA-4C45-8EB7-D5AEE0B7E73F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78A8F10A-B3CA-4C45-8EB7-D5AEE0B7E73F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78A8F10A-B3CA-4C45-8EB7-D5AEE0B7E73F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78A8F10A-B3CA-4C45-8EB7-D5AEE0B7E73F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
