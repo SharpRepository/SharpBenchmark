@@ -13,7 +13,7 @@ namespace SharpBenchmark.Samples.Code
             AddTest("Activator.CreateInstance<T>()", () => ActivatorCreateInstanceGeneric<TestClass>());
             AddTest("Activator.CreateInstance(type)", () => ActivatorCreateInstanceType(typeof (TestClass)));
 
-            RunTests(2000000);
+            RunTests(0, 10);
         }
 
         private static TestClass NewTestClass()

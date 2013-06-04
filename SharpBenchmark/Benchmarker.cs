@@ -14,6 +14,7 @@ namespace SharpBenchmark
         private readonly TextWriter _writer;
         private StringBuilder _builder;
         private readonly string _fileOutputPath = null;
+        private double _totalMilliseconds = 0;
 
         private readonly IDictionary<string, BenchmarkResult> _results = new Dictionary<string, BenchmarkResult>();
 
@@ -42,36 +43,94 @@ namespace SharpBenchmark
             _tests.Add(new BenchmarkItem { Title = title, Test = test });
         }
 
+        public void RunTests(TimeSpan totalTime)
+        {
+            RunWarmUp(1);
+
+            InternalRun(null, totalTime);
+        }
+
+        public void RunTests(int minutes, int seconds)
+        {
+            RunTests(TimeSpan.FromSeconds((minutes * 60) + seconds));
+        }
+
         public void RunTests(int num = 100000)
         {
-            _builder = new StringBuilder();
+            RunWarmUp(num);
 
+            InternalRun(num, null);
+        }
+
+        private void RunWarmUp(int totalNum)
+        {
             // WARM-UP
             // run thru each of them once because otherwise the first loop is slower due to the Just In Time compilation
-            var numWarmups = Math.Ceiling(num * WarmUpPercentage);
+            var numWarmups = Math.Ceiling(totalNum * WarmUpPercentage);
 
-//            WriteLine();
-//            WriteLine(String.Format("Running warmup tests {0:#,0} times", numWarmups));
-
-            for (var i = 0; i < numWarmups; i++ )
+            for (var i = 0; i < numWarmups; i++)
+            {
                 foreach (var test in _tests)
                 {
                     test.Test();
                 }
+            }
+        }
+
+        private void InternalRun(int? totalTests, TimeSpan? totalTime)
+        { 
+            _builder = new StringBuilder();
 
             WriteLine();
-            WriteLine(String.Format("Running each test {0:#,0} times", num));
+
+            if (totalTests.HasValue)
+            {
+                WriteLine(String.Format("Running each test {0:#,0} times", totalTests));
+            }
+            else
+            {
+                WriteLine(String.Format("Running tests for {0}", totalTime));
+            }
+
             WriteLine();
             WriteLine("----------------------------------------------------");
             WriteLine("Running tests: ");
 
-            for (var i = 0; i < _tests.Count; i++) 
+            if (totalTests.HasValue)
             {
-                WriteLine(String.Format("   Pass {0}...", i+1));
-                InternalRun(num / _tests.Count);
+                for (var i = 0; i < _tests.Count; i++)
+                {
+                    WriteLine(String.Format("   Pass {0}...", i + 1));
+                    InternalSingleRun(totalTests.Value/_tests.Count);
+                }
+            }
+            else if (totalTime.HasValue)
+            {
+                // the batch size will get adjusted based on how long they are taking to process
+                //  we need to start with 1 and then increase based on their speed
+                var batchSize = 1;
+                long totalTimesRan = 0;
+                
+                while (_totalMilliseconds < totalTime.Value.TotalMilliseconds)
+                {
+                    InternalSingleRun(batchSize);
+                    totalTimesRan += batchSize;
+
+                    // adjust batch size based on the current pace
+                    var percentDone = _totalMilliseconds/totalTime.Value.TotalMilliseconds;
+                    var estimatedMoreRuns = totalTimesRan/percentDone;
+
+                    // let's be safe and try to split it up into a batch for each test so it gets to run in various order
+                    batchSize = (int)Math.Floor(estimatedMoreRuns / _tests.Count+1);
+
+                    WriteLine(String.Format("   Running new batch of {0:#,0} tests", batchSize));
+                }
+
+                WriteLine();
+                WriteLine(String.Format("   Ran {0:#,0} times in time allotted", totalTimesRan));
+                WriteLine(String.Format("   Took a total of {0}", TimeSpan.FromMilliseconds(_totalMilliseconds)));
             }
 
-                
             DisplayResults();
 
             var resultsText = _builder.ToString();
@@ -90,10 +149,10 @@ namespace SharpBenchmark
             }
         }
 
-        private void InternalRun(int num)
+        private void InternalSingleRun(int num)
         {
             var sw = new Stopwatch();
-
+            
             foreach (var benchmarkItem in _tests.OrderBy(x => Guid.NewGuid()))
             {
                 sw.Reset();
@@ -132,6 +191,7 @@ namespace SharpBenchmark
             var result = _results[item.Title];
             result.TimeRun += timesRun;
             result.TotalTime += totalTime;
+            _totalMilliseconds += totalTime;
         }
 
 

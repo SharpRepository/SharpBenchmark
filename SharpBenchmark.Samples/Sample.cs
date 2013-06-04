@@ -21,6 +21,16 @@ namespace SharpBenchmark.Samples
             Benchmarker.RunTests(num);
         }
 
+        public void RunTests(TimeSpan totalTime)
+        {
+            Benchmarker.RunTests(totalTime);
+        }
+
+        public void RunTests(int minutes, int seconds)
+        {
+            Benchmarker.RunTests(minutes, seconds);
+        }
+
         public abstract void Execute(string[] args);
     }
 }
