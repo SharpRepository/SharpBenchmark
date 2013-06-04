@@ -110,6 +110,7 @@ namespace SharpBenchmark
                 //  we need to start with 1 and then increase based on their speed
                 var batchSize = 1;
                 long totalTimesRan = 0;
+                var batchPercentage = 1.0/(_tests.Count+1);
                 
                 while (_totalMilliseconds < totalTime.Value.TotalMilliseconds)
                 {
@@ -118,12 +119,18 @@ namespace SharpBenchmark
 
                     // adjust batch size based on the current pace
                     var percentDone = _totalMilliseconds/totalTime.Value.TotalMilliseconds;
-                    var estimatedMoreRuns = totalTimesRan/percentDone;
+                    var estimatedLeft = (totalTimesRan/ percentDone) - totalTimesRan;
 
                     // let's be safe and try to split it up into a batch for each test so it gets to run in various order
-                    batchSize = (int)Math.Floor(estimatedMoreRuns / _tests.Count+1);
+//                    batchSize = (int)Math.Floor(estimatedTotalRuns / _tests.Count + 1);
 
-                    WriteLine(String.Format("   Running new batch of {0:#,0} tests", batchSize));
+                    batchSize = (int)Math.Ceiling(estimatedLeft * batchPercentage);
+                    if (batchSize < 1) batchSize = 1;
+                    WriteLine(String.Format("   Running new batch of {0:#,0} tests ({1:0}% complete so far) ...", batchSize, percentDone*100));
+
+                    // increase the percentage we want to get to for the next batch
+                    //  this is used to estimate the number of times we need to run to get to 25%, then 50%, then 75%, etc. (for example)
+                    batchPercentage += 1.0 / (_tests.Count + 1);
                 }
 
                 WriteLine();
