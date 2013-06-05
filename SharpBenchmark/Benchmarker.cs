@@ -180,9 +180,11 @@ namespace SharpBenchmark
             WriteLine();
             WriteLine("Results: (fastest first)");
 
+            var fastestTime = _results.Values.Min(x => x.TotalTime);
             foreach (var item in _results.Values.OrderBy(x => x.TotalTime))
             {
-                WriteLine(item.Display);
+                WriteLine(item.Display(fastestTime));
+                WriteLine();
             }
 
             WriteLine();

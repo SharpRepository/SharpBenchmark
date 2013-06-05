@@ -13,9 +13,15 @@ namespace SharpBenchmark
             get { return TotalTime/Convert.ToDouble(TimeRun); }
         }
 
-        public string Display
+        public string Display(double fastestTime)
         {
-            get { return String.Format("   {0}\r\n      {1} ms total -- {2} avg ms per", Title, TotalTime, AverageTime); }
+            string percentSlowerText = String.Empty;
+            if (fastestTime != TotalTime)
+            {
+                percentSlowerText = String.Format("\r\n      {0:0.0%} slower", (TotalTime/fastestTime) - 1.0);
+            }
+
+            return String.Format("   {0}{3}\r\n      {1:#,0.00} ms total -- {2:0.0000} avg ms per", Title, TotalTime, AverageTime, percentSlowerText);
         }
     }
 }
