@@ -1,0 +1,71 @@
+<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="SharpBenchmark.Wpf.ShellView"
+        d:DesignWidth="1347">
+
+    <Grid Background="White">
+        <ToolBarTray HorizontalAlignment="Left" Height="35" Margin="10,0,0,0" VerticalAlignment="Top" Width="740" RenderTransformOrigin="0.55,0.24">
+            <ToolBar HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="1315" Margin="0,0,-1291,-22">
+                <Button Content="Add Assembly..." x:Name="OpenFile" />
+            </ToolBar>
+        </ToolBarTray>
+
+
+        <TreeView HorizontalAlignment="Left" Height="424" Margin="10,71,0,0" VerticalAlignment="Top" Width="351" x:Name="AssemblyExplorerItems"
+			cal:Message.Attach="[Event MouseDoubleClick] = [Action SelectedItem($this.SelectedItem)]"
+                  >
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                    <TextBlock Text="{Binding Display}" />
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <StackPanel x:Name="TestsPanel" HorizontalAlignment="Left" Height="393" Margin="392,102,0,0" VerticalAlignment="Top" Width="393">
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding ParameterInputControls}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="10" BorderThickness="1" BorderBrush="LightBlue">
+                                <StackPanel Orientation="Vertical" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Display}"/>
+                                    </StackPanel>
+                                    <Line Fill="LightBlue" HorizontalAlignment="Left" Width="200"/>
+                                    <TextBlock Text="Parameter Entry" />
+
+                                    <ItemsControl ItemsSource="{Binding Parameters}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding TypeName}"/>
+                                                    <TextBlock Text="  "/>
+                                                    <TextBlock Text="{Binding Name}"/>
+                                                    <TextBlock Text=":  "/>
+                                                    <TextBox Width="150" Text="{Binding InputValue}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+            </ScrollViewer>
+
+        </StackPanel>
+        <Label Content="Loaded Assemblies (double click methods to add to current test)" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+        <Button Content="Run Tests" x:Name="RunTests" HorizontalAlignment="Left" Margin="710,44,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Current Tests" HorizontalAlignment="Left" Margin="392,71,0,0" VerticalAlignment="Top"/>
+        <Label Content="Results:" HorizontalAlignment="Left" Margin="843,40,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ResultDisplay" HorizontalAlignment="Left" Margin="850,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="429" Width="479"/>
+        <TextBox x:Name="TestConfigValue" HorizontalAlignment="Left" Height="23" Margin="392,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboValueType" HorizontalAlignment="Left" Margin="527,44,0,0" VerticalAlignment="Top" Width="120"/>
+
+
+    </Grid>
+
+</Window>

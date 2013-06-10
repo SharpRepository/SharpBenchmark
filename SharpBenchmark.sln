@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpBenchmark.Samples", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpBenchmark.ExampleDll", "SharpBenchmark.ExampleDll\SharpBenchmark.ExampleDll.csproj", "{0ACEB135-2314-4A6F-A9B6-3D2EF5B013B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpBenchmark.Wpf", "SharpBenchmark.Wpf\SharpBenchmark.Wpf.csproj", "{23DD0E1F-D1D8-4E6B-930E-C92D78BA6754}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpBenchmark.AssemblyHelper", "SharpBenchmark.AssemblyHelper\SharpBenchmark.AssemblyHelper.csproj", "{F6E26086-C663-43BE-A893-E9B6C5F6894A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,14 @@ Global
 		{0ACEB135-2314-4A6F-A9B6-3D2EF5B013B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0ACEB135-2314-4A6F-A9B6-3D2EF5B013B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0ACEB135-2314-4A6F-A9B6-3D2EF5B013B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23DD0E1F-D1D8-4E6B-930E-C92D78BA6754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23DD0E1F-D1D8-4E6B-930E-C92D78BA6754}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23DD0E1F-D1D8-4E6B-930E-C92D78BA6754}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23DD0E1F-D1D8-4E6B-930E-C92D78BA6754}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6E26086-C663-43BE-A893-E9B6C5F6894A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6E26086-C663-43BE-A893-E9B6C5F6894A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6E26086-C663-43BE-A893-E9B6C5F6894A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6E26086-C663-43BE-A893-E9B6C5F6894A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

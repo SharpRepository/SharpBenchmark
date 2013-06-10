@@ -13,18 +13,10 @@ namespace SharpBenchmark.ExampleDll
         {
             Thread.Sleep(235);
         }
-    }
 
-    public class Test2
-    {
-        public void Algorithm1(int delay)
+        public static void StaticAlgorithm()
         {
-            Thread.Sleep(delay);
-        }
-
-        public void Algorithm2(int delay)
-        {
-            Thread.Sleep(delay);
+            Thread.Sleep(750);
         }
     }
 }
