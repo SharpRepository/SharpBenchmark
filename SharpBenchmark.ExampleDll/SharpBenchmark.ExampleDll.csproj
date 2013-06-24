@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConstrcutorNeedsParams.cs" />
+    <Compile Include="ConstrucutorNeedsParams.cs" />
     <Compile Include="Test1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test2.cs" />

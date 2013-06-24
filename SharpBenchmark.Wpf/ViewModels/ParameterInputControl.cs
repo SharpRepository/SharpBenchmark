@@ -36,4 +36,19 @@ namespace SharpBenchmark.Wpf.ViewModels
             get { return _methodItem.Parameters; }
         }
     }
+
+    public class ConstructorInputControl : PropertyChangedBase
+    {
+        private readonly AssemblyExplorerItem.ClassItem _classItem;
+
+        public ConstructorInputControl(AssemblyExplorerItem.ClassItem classItem)
+        {
+            _classItem = classItem;
+        }
+
+//        public IList<AssemblyExplorerItem.ParameterItem> ConstructorParameters
+//        {
+//            get { return _classItem.ConstructorParameters; }
+//        }
+    }
 }

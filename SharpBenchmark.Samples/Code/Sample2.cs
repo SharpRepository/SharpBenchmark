@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+
 namespace SharpBenchmark.Samples.Code
 {
     class Sample2 : Sample
@@ -13,7 +12,7 @@ namespace SharpBenchmark.Samples.Code
             AddTest("Activator.CreateInstance<T>()", () => ActivatorCreateInstanceGeneric<TestClass>());
             AddTest("Activator.CreateInstance(type)", () => ActivatorCreateInstanceType(typeof (TestClass)));
 
-            RunTests(0, 10);
+            RunTests(TimeSpan.FromSeconds(10));
         }
 
         private static TestClass NewTestClass()

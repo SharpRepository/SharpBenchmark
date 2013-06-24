@@ -108,7 +108,7 @@ namespace SharpBenchmark.Wpf
             return _loadedAssemblyFiles.Select(x => new AssemblyExplorerItem(x.Path)).ToList();
         }
 
-        public void SelectedItem(object item)
+        public void AssemblyOnSelected(object item)
         {
             var methodItem = item as AssemblyExplorerItem.MethodItem;
             if (methodItem != null)
@@ -117,7 +117,7 @@ namespace SharpBenchmark.Wpf
             }
         }
 
-        private ObservableCollection<ParameterInputControl> _parameterInputControls = new ObservableCollection<ParameterInputControl>();
+        private readonly ObservableCollection<ParameterInputControl> _parameterInputControls = new ObservableCollection<ParameterInputControl>();
         public ObservableCollection<ParameterInputControl> ParameterInputControls
         {
             get { return _parameterInputControls; }

@@ -32,13 +32,15 @@ namespace SharpBenchmark.Wpf.Models
                 Type = type;
                 Name = type.FullName;
 
+                Constructors = type.GetConstructors().Select(x => new ConstructorItem(x)).ToList()  ;
+
                 Methods = type.GetMethods().Where(x => x.DeclaringType != typeof(object)).Select(x => new MethodItem(Type, x)).ToList();
             }
 
             public string Name { get; set; }
             public Type Type { get; set; }
 
-            
+            public IList<ConstructorItem> Constructors { get; set; }
             public IList<MethodItem> Methods { get; set; }
 
             // for tree view
@@ -77,6 +79,20 @@ namespace SharpBenchmark.Wpf.Models
                     return String.Format("{0}({1})", Name, parameters);
                 }
             }
+        }
+
+        public class ConstructorItem
+        {
+            private readonly ConstructorInfo _constructorInfo;
+
+            public ConstructorItem(ConstructorInfo constructorInfo)
+            {
+                _constructorInfo = constructorInfo;
+
+                Parameters = _constructorInfo.GetParameters().Select(x => new ParameterItem(x)).ToList();
+            }
+
+            public IList<ParameterItem> Parameters { get; set; }
         }
 
         public class ParameterItem
